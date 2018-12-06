@@ -2,11 +2,11 @@
 
 #[macro_use] extern crate rocket;
 
-#[get("/")]
-fn index() -> &'static str {
-    "Hi!"
+#[get("/<name>/<age>")]
+fn index(name: String, age: u8) -> String {
+    format!("Hello, {} year old named {}!", age, name)
 }
 
 fn main() {
-    rocket::ignite().mount("/", routes![index]).launch();
+    rocket::ignite().mount("/hello", routes![index]).launch();
 }
