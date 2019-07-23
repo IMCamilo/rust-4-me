@@ -1,6 +1,6 @@
 [package]
-name = "rust-4-me"
 version = "0.1.0"
+name = "gs-rocket"
 authors = ["Camilo Jorquera <--add>"]
 edition = "2018"
 
