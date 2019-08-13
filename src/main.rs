@@ -9,31 +9,33 @@ fn health() -> content::Json<&'static str>{
     content::Json("{'status':'UP'}")
 }
 
-#[get("/<rut>/<name>")]
-fn get_detail(name: String, rut: String) -> content::Json<String> {
-    let detail:String = format!("{{ '{}':'{}'}}", rut, name);
+#[get("/<dni>/<name>")]
+fn get_rustacean(name: String, dni: String) -> content::Json<String> {
+    let detail:String = format!("{{ '{}':'{}'}}", dni, name);
     content::Json(detail)
 }
 
-#[post("/<rut>")]
-fn new_person(rut: String) -> content::Json<String> {
-    content::Json(format!("{{'created':'{}'}}", rut))
+#[post("/<dni>")]
+fn create_rustacean(dni: String) -> content::Json<String> {
+    content::Json(format!("{{'created':'{}'}}", dni))
 }
 
-#[put("/<rut>")]
-fn update_person(rut: String) -> content::Json<String> {
-    content::Json(format!("{{'updated':'{}'}}", rut))
+#[put("/<dni>")]
+fn update_rustacean(dni: String) -> content::Json<String> {
+    content::Json(format!("{{'updated':'{}'}}", dni))
 }
 
-#[delete("/<rut>")]
-fn del_person(rut: String) -> content::Json<String> {
-    content::Json(format!("{{'deleted':'{}'}}", rut))
+#[delete("/<dni>")]
+fn delete_rustacean(dni: String) -> content::Json<String> {
+    content::Json(format!("{{'deleted':'{}'}}", dni))
 }
 
 fn main() {
-    rocket::ignite().mount("/gs", routes![get_detail,
+    rocket::ignite().mount("/gs", routes![
     health,
-    new_person,
-    update_person,
-    del_person]).launch();
+    get_rustacean,
+    create_rustacean,
+    update_rustacean,
+    delete_rustacean
+    ]).launch();
 }
